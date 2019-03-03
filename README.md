@@ -27,6 +27,10 @@ the harmonic series with different fundamentals, putting the notes in reverse or
 
 Source: [krazydad.com](https://web.archive.org/web/20180802002553/https://krazydad.com/blog/2006/04/23/visual-harmony/)
 
+[White paper](https://jbum.com/papers/whitney_paper.pdf)
+
+[Nice explanation by Jim Bumgardner at Gel 2007](https://www.youtube.com/watch?v=6nwJ5nqN4Mw)
+
 More examples at: [github.com/jbum/Whitney-Music-Box-Examples](https://github.com/jbum/Whitney-Music-Box-Examples)
 
 ## Compilation

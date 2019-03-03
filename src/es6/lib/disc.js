@@ -3,18 +3,18 @@ import EventEmitter from 'events';
 import Tine from './tine';
 
 export default class Disc {
-  constructor(center, radius, tineCount) {
+  constructor(center, radius, tineCount, colors) {
     this.showTracks = false;
     this.center = center;
     this.radius = radius;
     this.speed = 0;
     this.path = Disc.createPath(center, radius);
     this.zero = Disc.createZero(center, radius);
-    this.tines = this.createTines(tineCount);
+    this.tines = this.createTines(tineCount, colors);
     this.events = new EventEmitter();
   }
 
-  createTines(count) {
+  createTines(count, colors) {
     const tines = [];
     const tineSize = (this.radius / count) * 2;
     const minR = 0;
@@ -23,12 +23,13 @@ export default class Disc {
     for (let i = 0; i < count; i += 1) {
       const r = minR + ((maxR - minR) / count) * (i + 1);
       const speedFactor = i + 1;
+      const color = colors[i % colors.length];
       if (this.showTracks) {
         this.tracks = [];
         this.tracks.push(new paper.Path.Circle(this.center, r)
           .strokeColor = 'white');
       }
-      tines.push(new Tine(i + 1, this, r, tineSize, 'white', speedFactor));
+      tines.push(new Tine(i + 1, this, r, tineSize, color, speedFactor));
     }
 
     return tines;

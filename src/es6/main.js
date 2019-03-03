@@ -2,14 +2,16 @@ import paper from 'paper';
 import Tone from 'tone';
 import Disc from './lib/disc';
 import Slider from './lib/slider';
+import rainbow from './lib/rainbow';
 
 const canvas = document.getElementById('mainCanvas');
 paper.setup(canvas);
 
 const tineCount = 48;
+const colors = rainbow(tineCount);
 const discCenter = paper.view.center;
 const discRadius = Math.min(paper.view.size.height, paper.view.size.width) / 2;
-const disc = new Disc(discCenter, discRadius, tineCount);
+const disc = new Disc(discCenter, discRadius, tineCount, colors);
 
 const scale = [];
 for (let i = 0; i !== tineCount; i += 1) {
