@@ -35,6 +35,10 @@ slider.events.on('changed', (value) => {
   disc.setSpeed(value);
 });
 
+document.addEventListener('wheel', (ev) => {
+  disc.setSpeed(Math.min(ev.deltaY / 5000, 1));
+});
+
 paper.view.onFrame = ((ev) => {
   notesToPlay.length = 0;
   disc.onFrame(ev);

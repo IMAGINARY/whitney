@@ -5,10 +5,11 @@ import Tine from './tine';
 export default class Disc {
   constructor(center, radius, tineCount, colors) {
     this.showTracks = false;
+    this.showBackground = false;
     this.center = center;
     this.radius = radius;
     this.speed = 0;
-    this.path = Disc.createPath(center, radius);
+    this.path = this.showBackground ? Disc.createPath(center, radius) : null;
     this.zero = Disc.createZero(center, radius);
     this.tines = this.createTines(tineCount, colors);
     this.events = new EventEmitter();
