@@ -17,12 +17,16 @@ export default class Disc {
 
   createTines(count, colors) {
     const tines = [];
-    const tineSize = (this.radius / count) * 2;
-    const minR = 0;
-    const maxR = this.radius - tineSize / 2;
+    const baseSize = (this.radius / count) * 2;
+    const minSizeFactor = 0.5;
+    const maxSizeFactor = 3;
+    const minR = baseSize * minSizeFactor / 2;
+    const maxR = this.radius - (baseSize * maxSizeFactor) / 2;
 
     for (let i = 0; i < count; i += 1) {
-      const r = minR + ((maxR - minR) / count) * (i + 1);
+      const sizeFactor = minSizeFactor + ((maxSizeFactor - minSizeFactor) / (count - 1)) * i;
+      // const r = minR + ((maxR - minR) / count) * (i + 1);
+      const r = minR + ((maxR - minR) / (count - 1)) * i;
       const speedFactor = i + 1;
       const color = colors[i % colors.length];
       if (this.showTracks) {
@@ -30,7 +34,14 @@ export default class Disc {
         this.tracks.push(new paper.Path.Circle(this.center, r)
           .strokeColor = 'white');
       }
-      tines.push(new Tine(i + 1, this, r, tineSize, color, speedFactor));
+      tines.push(new Tine(
+        i + 1,
+        this,
+        r,
+        baseSize * sizeFactor,
+        color,
+        speedFactor
+      ));
     }
 
     return tines;

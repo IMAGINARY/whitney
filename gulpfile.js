@@ -62,16 +62,16 @@ function bundleApp(isProduction) {
     .pipe(gulp.dest(output_dir + '/js'));
 }
 
-gulp.task('scripts:dev', function () {
-  bundleApp(false);
-});
+// gulp.task('scripts:dev', function () {
+//   bundleApp(false);
+// });
 
 gulp.task('scripts:prod', function (){
   bundleApp(true);
 });
 
-gulp.task('scripts:watch', function () {
-  gulp.watch(['./src/js/*.js'], ['scripts:dev']);
-});
+// gulp.task('scripts:watch', function () {
+//   gulp.watch(['./src/js/*.js'], ['scripts:dev']);
+// });
 
 gulp.task('default', ['scripts:prod']);
