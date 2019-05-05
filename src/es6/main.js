@@ -1,11 +1,13 @@
 import paper from 'paper';
 import Tone from 'tone';
+import querystring from 'query-string';
 import Disc from './lib/disc';
 import Slider from './lib/slider';
 import rainbow from './lib/rainbow';
 
-const canvas = document.getElementById('mainCanvas');
-paper.setup(canvas);
+const qs = querystring.parse(window.location.search);
+
+paper.setup($('#mainCanvas')[0]);
 
 const tineCount = 48;
 const colors = rainbow(tineCount);
@@ -24,11 +26,6 @@ disc.events.on('zero', (tineID) => {
   notesToPlay.push(scale[tineID - 1]);
 });
 
-const slider = new Slider(document.getElementById('speedSlider'));
-slider.events.on('changed', (value) => {
-  disc.setSpeed(value);
-});
-
 document.addEventListener('wheel', (ev) => {
   disc.setSpeed(Math.min(ev.deltaY / 5000, 1));
 });
@@ -38,4 +35,16 @@ paper.view.onFrame = ((ev) => {
   disc.onFrame(ev);
   synth.triggerAttackRelease(notesToPlay, '8n');
 });
+
+if (qs.screenControls && qs.screenControls !== '0') {
+  const sliderWrapper = $('<div></div>')
+    .attr('id', 'speedSlider')
+    .addClass('slider')
+    .appendTo('.main');
+  const slider = new Slider(sliderWrapper[0]);
+  slider.events.on('changed', (value) => {
+    disc.setSpeed(value);
+  });
+}
+
 paper.view.draw();

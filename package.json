@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "paper": "^0.12.0",
+    "query-string": "5",
     "tone": "^13.4.9"
   }
 }

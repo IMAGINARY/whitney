@@ -9,20 +9,11 @@ body {
     background-color: #000;
 }
 
-.bigcol {
-    float: left;
-    box-sizing: border-box;
+.main {
+    position: relative;
     padding: 5vmin;
-    width: 80%;
     height: 100%;
-}
-
-.smallcol {
-    float: left;
     box-sizing: border-box;
-    padding: 5vmin;
-    width: 20%;
-    height: 100%;
 }
 
 #mainCanvas {
@@ -31,8 +22,11 @@ body {
 }
 
 .slider {
-    position: relative;
+    position: absolute;
     height: 2em;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
 }
 
 .slider:before {

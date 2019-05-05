@@ -33,6 +33,18 @@ Source: [krazydad.com](https://web.archive.org/web/20180802002553/https://krazyd
 
 More examples at: [github.com/jbum/Whitney-Music-Box-Examples](https://github.com/jbum/Whitney-Music-Box-Examples)
 
+## Running
+
+Just open the index.html file.
+
+To operate the Whitney Music Box using on-screen controls use the screenControls query string argument:
+
+```
+index.html?screenControls=1
+```
+
+otherwise the music box listens to the mousewheel event to rotate.
+
 ## Compilation
 
 Compilation is not needed unless you want to do modifications.
