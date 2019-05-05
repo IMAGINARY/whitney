@@ -19,7 +19,7 @@ export default class Disc {
     const tines = [];
     const baseSize = (this.radius / count) * 2;
     const minSizeFactor = 0.5;
-    const maxSizeFactor = 3;
+    const maxSizeFactor = 4;
     const minR = baseSize * minSizeFactor / 2;
     const maxR = this.radius - (baseSize * maxSizeFactor) / 2;
 
@@ -69,6 +69,7 @@ export default class Disc {
 
   static createZero(center, radius) {
     const path = new paper.Path.Line(center, center.add(new paper.Point(radius, 0)));
-    path.strokeColor = 'white';
+    path.strokeColor = '#fff';
+    return path;
   }
 }

@@ -29,12 +29,27 @@ export default class Tine {
   }
 
   onZero() {
+    this.path.tween(
+      {
+        fillColor: '#fff',
+        scaling: new paper.Point(1.25, 1.25),
+      },
+      {
+        fillColor: this.fillColor.toCSS(),
+        scaling: new paper.Point(1, 1),
+      },
+      {
+        duration: 500,
+        easing: 'easeInQuad',
+      }
+    );
     this.parent.onZero(this);
   }
 
   static buildPath(size, fillColor) {
     const path = new paper.Path.Circle(new paper.Point(0, 0), size / 2);
     path.fillColor = fillColor;
+    path.applyMatrix = false;
     return path;
   }
 }

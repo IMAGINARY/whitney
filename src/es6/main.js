@@ -18,12 +18,6 @@ for (let i = 0; i !== tineCount; i += 1) {
   scale.push(Tone.Frequency('A2').transpose(i));
 }
 const synth = new Tone.PolySynth(48, Tone.Synth).toMaster();
-synth.set('envelope', {
-  attack: 0,
-  decay: 0.1,
-  sustain: 0.3,
-  release: 1,
-});
 
 const notesToPlay = [];
 disc.events.on('zero', (tineID) => {
