@@ -8,7 +8,7 @@ export default class Tine {
     this.size = size;
     this.fillColor = fillColor;
     this.speedFactor = speedFactor;
-    this.path = Tine.buildPath(this.size, this.fillColor);
+    this.path = this.buildPath();
     this.setAngle(0);
   }
 
@@ -46,9 +46,9 @@ export default class Tine {
     this.parent.onZero(this);
   }
 
-  static buildPath(size, fillColor) {
-    const path = new paper.Path.Circle(new paper.Point(0, 0), size / 2);
-    path.fillColor = fillColor;
+  buildPath() {
+    const path = new paper.Path.Circle(new paper.Point(0, 0), this.size / 2);
+    path.fillColor = this.fillColor;
     path.applyMatrix = false;
     return path;
   }

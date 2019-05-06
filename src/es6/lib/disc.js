@@ -3,11 +3,12 @@ import EventEmitter from 'events';
 import Tine from './tine';
 
 export default class Disc {
-  constructor(center, radius, tineCount, colors) {
+  constructor(center, radius, TineClass, tineCount, colors) {
     this.showTracks = false;
     this.showBackground = false;
     this.center = center;
     this.radius = radius;
+    this.TineClass = TineClass;
     this.speed = 0;
     this.path = this.showBackground ? Disc.createPath(center, radius) : null;
     this.zero = Disc.createZero(center, radius);
@@ -34,7 +35,7 @@ export default class Disc {
         this.tracks.push(new paper.Path.Circle(this.center, r)
           .strokeColor = 'white');
       }
-      tines.push(new Tine(
+      tines.push(new this.TineClass(
         i + 1,
         this,
         r,
