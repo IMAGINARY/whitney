@@ -45,6 +45,14 @@ index.html?screenControls=1
 
 otherwise the music box listens to the mousewheel event to rotate.
 
+## Options
+
+The `showLines` query string argument joins the tines (dots) with lines for some nice geometrical patterns.
+
+```
+index.html?screenControls=1&showLines=1
+```
+
 ## Compilation
 
 Compilation is not needed unless you want to do modifications.

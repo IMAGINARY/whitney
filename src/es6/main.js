@@ -17,13 +17,25 @@ const TineClass = Tine;
 const colors = rainbow(tineCount);
 const discCenter = paper.view.center;
 const discRadius = Math.min(paper.view.size.height, paper.view.size.width) / 2;
-const disc = new Disc(discCenter, discRadius, TineClass, tineCount, colors);
+const disc = new Disc(discCenter, discRadius, TineClass, tineCount, colors,
+  (qs.showLines !== undefined && qs.showLines !== '0'));
 
 const scale = [];
 for (let i = 0; i !== tineCount; i += 1) {
   scale.push(Tone.Frequency('A2').transpose(i));
 }
-const synth = new Tone.PolySynth(48, Tone.Synth).toMaster();
+
+// for (let i = 0; i < tineCount / 7; i += 1) {
+//   scale.push(Tone.Frequency('C2').transpose(i * 12));
+//   scale.push(Tone.Frequency('D2').transpose(i * 12));
+//   scale.push(Tone.Frequency('E2').transpose(i * 12));
+//   scale.push(Tone.Frequency('F2').transpose(i * 12));
+//   scale.push(Tone.Frequency('G2').transpose(i * 12));
+//   scale.push(Tone.Frequency('A2').transpose(i * 12));
+//   scale.push(Tone.Frequency('B2').transpose(i * 12));
+// }
+
+const synth = new Tone.PolySynth(tineCount, Tone.Synth).toMaster();
 
 const notesToPlay = [];
 disc.events.on('zero', (tineID) => {

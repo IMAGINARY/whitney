@@ -1,16 +1,17 @@
 import paper from 'paper';
 import EventEmitter from 'events';
-import Tine from './tine';
 
 export default class Disc {
-  constructor(center, radius, TineClass, tineCount, colors) {
+  constructor(center, radius, TineClass, tineCount, colors, showLines = false) {
     this.showTracks = false;
     this.showBackground = false;
+    this.showLines = showLines;
     this.center = center;
     this.radius = radius;
     this.TineClass = TineClass;
     this.speed = 0;
     this.path = this.showBackground ? Disc.createPath(center, radius) : null;
+    this.lines = this.showLines ? Disc.createLines(tineCount) : null;
     this.zero = Disc.createZero(center, radius);
     this.tines = this.createTines(tineCount, colors);
     this.events = new EventEmitter();
@@ -50,6 +51,9 @@ export default class Disc {
 
   onFrame(ev) {
     this.tines.forEach(tine => tine.onFrame(ev));
+    if (this.showLines) {
+      this.moveLines();
+    }
   }
 
   onZero(tine) {
@@ -58,6 +62,17 @@ export default class Disc {
 
   setSpeed(speed) {
     this.speed = speed * 1 / (this.tines.length * 2);
+  }
+
+  moveLines() {
+    this.tines.forEach((tine, i) => {
+      if (i !== 0) {
+        this.lines[i - 1].segments[1].point = tine.path.position;
+      }
+      if (i !== this.tines.length - 1) {
+        this.lines[i].segments[0].point = tine.path.position;
+      }
+    });
   }
 
   static createPath(center, radius) {
@@ -72,5 +87,20 @@ export default class Disc {
     const path = new paper.Path.Line(center, center.add(new paper.Point(radius, 0)));
     path.strokeColor = '#fff';
     return path;
+  }
+
+  static createLines(count) {
+    const output = [];
+    for (let i = 0; i !== count; i += 1) {
+      output.push(
+        new paper.Path.Line({
+          from: [0, 0],
+          to: [1, 1],
+          strokeColor: '#fff',
+          strokeWidth: 1,
+        })
+      );
+    }
+    return output;
   }
 }
